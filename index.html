@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Party Time Feature</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/PX3MbvN.png" />
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  .background {
+    background-image: url('https://i.imgur.com/8vAlRXz.png'); /* Placeholder for the provided image */
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    position: relative;
+  }
+  #partyTimeText {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: black;
+    font-weight: bold;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+
+<div class="background" id="background">
+  <div id="partyTimeText">PARTY TIME</div>
+</div>
+
+<script>
+  function getRandomTime(maxSeconds) {
+    return Math.random() * maxSeconds * 1000;
+  }
+
+  function flashColors() {
+    const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+    const partyTimeText = document.getElementById('partyTimeText');
+    partyTimeText.style.display = 'block';
+    let count = 0;
+
+    const intervalId = setInterval(() => {
+      document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      if (count >= 10) {
+        clearInterval(intervalId);
+        document.body.style.backgroundColor = '';
+        partyTimeText.style.display = 'none';
+        if (window.navigator.vibrate) {
+          window.navigator.vibrate(0); // Stop vibrating
+        }
+      } else {
+        if (window.navigator.vibrate) {
+          window.navigator.vibrate(200); // Vibrate for 200ms
+        }
+      }
+      count++;
+    }, 1000);
+  }
+
+  setInterval(() => {
+    setTimeout(flashColors, getRandomTime(180));
+  }, 180 * 1000);
+</script>
+
+</body>
+</html>
