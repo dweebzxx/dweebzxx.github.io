@@ -1,58 +1,26 @@
-body {
-    font-family: 'Inter', sans-serif;
-    background: url("https://i.imgur.com/8vAlRXz.png") no-repeat center center fixed;
-    background-size: cover;
-    overflow: hidden;
-}
-
-#flashOverlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    display: none;
-    pointer-events: none;
-    z-index: 998;
-}
-
-#partyTimeText {
-    font-family: 'Bangers', cursive;
-    font-size: 6rem;
-    color: white;
-    text-align: center;
-    text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000, 4px 4px 5px rgba(0,0,0,0.5);
-    display: none; 
-    user-select: none;
-    pointer-events: none;
-    -webkit-text-stroke: 2px black;
-    paint-order: stroke fill;
-    position: absolute;
-    z-index: 1000;
-}
-
-#buttonCluster {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    pointer-events: none;
-    z-index: 999;
-}
-
-.control-button {
-    position: absolute;
-    pointer-events: auto;
-    width: 56px; height: 56px;
-    font-size: 1.875rem; line-height: 2.25rem;
-    transition: transform 0.2s ease-in-out;
-}
-.control-button:hover { transform: scale(1.1); }
-
-#bangButton { top: 48%; left: 50%; transform: translate(-50%, -50%); }
-#pButton { top: 70%; left: 38%; transform: translate(-50%, -50%); }
-#cButton { top: 70%; left: 62%; transform: translate(-50%, -50%); }
-
-@media (max-width: 640px) {
-    #partyTimeText { font-size: 4rem; }
-    .control-button { width: 48px; height: 48px; font-size: 1.5rem; }
-    #pButton { top: 70%; left: 35%; }
-    #cButton { top: 70%; left: 65%; }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slam Rush</title>
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Link to your custom stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="flashOverlay"></div>
+    <h1 id="partyTimeText"></h1>
+    <div id="buttonCluster">
+        <button id="bangButton" class="control-button bg-red-600 text-white font-bold rounded-full flex items-center justify-center shadow-lg">!</button>
+        <button id="pButton" class="control-button bg-red-600 text-white font-bold rounded-full flex items-center justify-center shadow-lg">P</button>
+        <button id="cButton" class="control-button bg-red-600 text-white font-bold rounded-full flex items-center justify-center shadow-lg">C</button>
+    </div>
+    <!-- Link to your JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
