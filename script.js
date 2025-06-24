@@ -17,29 +17,24 @@ function startFlashing(forceMessage = null) {
     const buttonCluster = document.getElementById("buttonCluster");
     const flashOverlay = document.getElementById("flashOverlay");
 
-    partyTimeText.style.fontSize = window.innerWidth <= 640 ? '4rem' : '6rem';
     partyTimeText.innerHTML = '';
     
+    // Set text based on manual or random message
     if (forceMessage === 'cloud') {
         partyTimeText.textContent = "Let's Cloud!";
     } else if (forceMessage === 'popper') {
         partyTimeText.textContent = "Popper Up!";
     } else if (forceMessage === 'both') {
         partyTimeText.innerHTML = "Let's Cloud!<br>Popper Up!";
-        partyTimeText.style.fontSize = window.innerWidth <= 640 ? '3rem' : '4.5rem';
     } else {
         const randomNumber = Math.random();
-        if (randomNumber < 0.7) {
-            partyTimeText.textContent = "Let's Cloud!";
-        } else {
-            partyTimeText.textContent = "Popper Up!";
-        }
+        partyTimeText.textContent = randomNumber < 0.7 ? "Let's Cloud!" : "Popper Up!";
     }
 
     buttonCluster.style.display = "none";
     flashOverlay.style.display = "block";
 
-    partyInterval = setInterval(function() {
+    partyInterval = setInterval(function () {
         flashOverlay.style.backgroundColor = getRandomColor();
         partyTimeText.style.display = "block";
         const maxX = window.innerWidth - partyTimeText.offsetWidth;
@@ -65,7 +60,9 @@ function scheduleRandomFlash() {
     randomFlashTimeoutId = setTimeout(() => {
         if (Math.random() < 0.1) {
             startFlashing('both'); 
-            setTimeout(() => { if(isPartyRunning) startFlashing('both'); }, 10500);
+            setTimeout(() => {
+                if (isPartyRunning) startFlashing('both');
+            }, 10500);
         } else {
             startFlashing();
         }
@@ -78,8 +75,10 @@ function handleManualTrigger(message) {
     startFlashing(message);
 }
 
+// Event listeners for button clicks
 document.getElementById('bangButton').addEventListener('click', () => handleManualTrigger(null));
 document.getElementById('cButton').addEventListener('click', () => handleManualTrigger('cloud'));
 document.getElementById('pButton').addEventListener('click', () => handleManualTrigger('popper'));
 
+// Start the random flash cycle on page load
 window.onload = scheduleRandomFlash;
