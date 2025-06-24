@@ -2,7 +2,7 @@
 
 An interactive and dynamic web page that creates a surprise "party" effect with flashing colors, moving text, and user-triggered events.
 
-**Live Demo:** [Link to your live site here]
+**By:** dweebz
 
 ## Description
 
