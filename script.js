@@ -1,58 +1,85 @@
-body {
-    font-family: 'Inter', sans-serif;
-    background: url("https://i.imgur.com/8vAlRXz.png") no-repeat center center fixed;
-    background-size: cover;
-    overflow: hidden;
+let isPartyRunning = false;
+let partyInterval = null;
+let partyTimeout = null;
+let randomFlashTimeoutId = null;
+
+function getRandomColor() {
+    const colors = ['rgba(255, 0, 0, 0.8)', 'rgba(255, 255, 255, 0.8)', 'rgba(0, 0, 0, 0.8)'];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
 }
 
-#flashOverlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    display: none;
-    pointer-events: none;
-    z-index: 998;
+function startFlashing(forceMessage = null) {
+    if (isPartyRunning) return;
+    isPartyRunning = true;
+
+    const partyTimeText = document.getElementById("partyTimeText");
+    const buttonCluster = document.getElementById("buttonCluster");
+    const flashOverlay = document.getElementById("flashOverlay");
+
+    partyTimeText.style.fontSize = window.innerWidth <= 640 ? '4rem' : '6rem';
+    partyTimeText.innerHTML = '';
+    
+    if (forceMessage === 'cloud') {
+        partyTimeText.textContent = "Let's Cloud!";
+    } else if (forceMessage === 'popper') {
+        partyTimeText.textContent = "Popper Up!";
+    } else if (forceMessage === 'both') {
+        partyTimeText.innerHTML = "Let's Cloud!<br>Popper Up!";
+        partyTimeText.style.fontSize = window.innerWidth <= 640 ? '3rem' : '4.5rem';
+    } else {
+        const randomNumber = Math.random();
+        if (randomNumber < 0.7) {
+            partyTimeText.textContent = "Let's Cloud!";
+        } else {
+            partyTimeText.textContent = "Popper Up!";
+        }
+    }
+
+    buttonCluster.style.display = "none";
+    flashOverlay.style.display = "block";
+
+    partyInterval = setInterval(function() {
+        flashOverlay.style.backgroundColor = getRandomColor();
+        partyTimeText.style.display = "block";
+        const maxX = window.innerWidth - partyTimeText.offsetWidth;
+        const maxY = window.innerHeight - partyTimeText.offsetHeight;
+        partyTimeText.style.left = Math.max(0, Math.random() * maxX) + "px";
+        partyTimeText.style.top = Math.max(0, Math.random() * maxY) + "px";
+    }, 200);
+
+    partyTimeout = setTimeout(stopFlashing, 10000);
 }
 
-#partyTimeText {
-    font-family: 'Bangers', cursive;
-    font-size: 6rem;
-    color: white;
-    text-align: center;
-    text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000, 4px 4px 5px rgba(0,0,0,0.5);
-    display: none; 
-    user-select: none;
-    pointer-events: none;
-    -webkit-text-stroke: 2px black;
-    paint-order: stroke fill;
-    position: absolute;
-    z-index: 1000;
+function stopFlashing() {
+    clearInterval(partyInterval);
+    document.getElementById("flashOverlay").style.display = 'none';
+    document.getElementById("partyTimeText").style.display = "none";
+    document.getElementById("buttonCluster").style.display = "block";
+    isPartyRunning = false;
+    scheduleRandomFlash();
 }
 
-#buttonCluster {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    pointer-events: none;
-    z-index: 999;
+function scheduleRandomFlash() {
+    const nextFlash = Math.random() * 240000;
+    randomFlashTimeoutId = setTimeout(() => {
+        if (Math.random() < 0.1) {
+            startFlashing('both'); 
+            setTimeout(() => { if(isPartyRunning) startFlashing('both'); }, 10500);
+        } else {
+            startFlashing();
+        }
+    }, nextFlash);
 }
 
-.control-button {
-    position: absolute;
-    pointer-events: auto;
-    width: 56px; height: 56px;
-    font-size: 1.875rem; line-height: 2.25rem;
-    transition: transform 0.2s ease-in-out;
+function handleManualTrigger(message) {
+    if (isPartyRunning) return;
+    clearTimeout(randomFlashTimeoutId);
+    startFlashing(message);
 }
-.control-button:hover { transform: scale(1.1); }
 
-#bangButton { top: 48%; left: 50%; transform: translate(-50%, -50%); }
-#pButton { top: 70%; left: 38%; transform: translate(-50%, -50%); }
-#cButton { top: 70%; left: 62%; transform: translate(-50%, -50%); }
+document.getElementById('bangButton').addEventListener('click', () => handleManualTrigger(null));
+document.getElementById('cButton').addEventListener('click', () => handleManualTrigger('cloud'));
+document.getElementById('pButton').addEventListener('click', () => handleManualTrigger('popper'));
 
-@media (max-width: 640px) {
-    #partyTimeText { font-size: 4rem; }
-    .control-button { width: 48px; height: 48px; font-size: 1.5rem; }
-    #pButton { top: 70%; left: 35%; }
-    #cButton { top: 70%; left: 65%; }
-}
+window.onload = scheduleRandomFlash;
