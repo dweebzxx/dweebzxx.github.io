@@ -46,13 +46,15 @@ body {
 }
 .control-button:hover { transform: scale(1.1); }
 
+/* Desktop Positions */
 #bangButton { top: 48%; left: 50%; transform: translate(-50%, -50%); }
-#pButton { top: 70%; left: 38%; transform: translate(-50%, -50%); }
-#cButton { top: 70%; left: 62%; transform: translate(-50%, -50%); }
+#pButton { top: 78%; left: 30%; transform: translate(-50%, -50%); }
+#cButton { top: 78%; left: 70%; transform: translate(-50%, -50%); }
 
+/* Mobile Positions */
 @media (max-width: 640px) {
     #partyTimeText { font-size: 4rem; }
     .control-button { width: 48px; height: 48px; font-size: 1.5rem; }
-    #pButton { top: 70%; left: 35%; }
-    #cButton { top: 70%; left: 65%; }
+    #pButton { top: 88%; left: 15%; transform: translate(-50%, -50%);}
+    #cButton { top: 88%; left: 85%; transform: translate(-50%, -50%);}
 }
