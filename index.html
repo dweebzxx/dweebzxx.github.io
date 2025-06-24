@@ -1,17 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Party Time Website</title>
-    <link rel="icon" href="https://i.imgur.com/V9RT8Ey.png" type="image/png">
+    <title>Party Time Flasher</title>
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to your custom stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="background">
-        <p id="partyTimeText">PARTY TIME</p>
+
+    <!-- This overlay is now used for the flashing colors -->
+    <div id="flashOverlay"></div>
+
+    <!-- This text will appear and move during the flashing effect -->
+    <h1 id="partyTimeText"></h1>
+
+    <!-- This container holds the buttons -->
+    <div id="buttonCluster">
+        <button id="bangButton" class="control-button bg-red-600 text-white font-bold rounded-full flex items-center justify-center shadow-lg">!</button>
+        <button id="pButton" class="control-button bg-red-600 text-white font-bold rounded-full flex items-center justify-center shadow-lg">P</button>
+        <button id="cButton" class="control-button bg-red-600 text-white font-bold rounded-full flex items-center justify-center shadow-lg">C</button>
     </div>
+
+    <!-- Link to your JavaScript file -->
     <script src="script.js"></script>
+
 </body>
 </html>
