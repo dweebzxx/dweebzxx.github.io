@@ -47,12 +47,12 @@ body {
 .control-button:hover { transform: scale(1.1); }
 
 #bangButton { top: 48%; left: 50%; transform: translate(-50%, -50%); }
-#pButton { top: 75%; left: 15%; transform: translate(-50%, -50%); }
-#cButton { top: 75%; left: 85%; transform: translate(-50%, -50%); }
+#pButton { top: 70%; left: 38%; transform: translate(-50%, -50%); }
+#cButton { top: 70%; left: 62%; transform: translate(-50%, -50%); }
 
 @media (max-width: 640px) {
     #partyTimeText { font-size: 4rem; }
     .control-button { width: 48px; height: 48px; font-size: 1.5rem; }
-    #pButton { top: 80%; left: 12%; }
-    #cButton { top: 80%; left: 88%; }
+    #pButton { top: 70%; left: 35%; }
+    #cButton { top: 70%; left: 65%; }
 }
