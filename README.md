@@ -1,5 +1,3 @@
-Of course. Here is the full content of the README file:
-
 # slam rush
 
 An interactive and dynamic web page that creates a surprise "party" effect with flashing colors, moving text, and user-triggered events.
