@@ -3,6 +3,8 @@ body {
     background: url("https://i.imgur.com/8vAlRXz.png") no-repeat center center fixed;
     background-size: cover;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 #flashOverlay {
@@ -16,11 +18,11 @@ body {
 
 #partyTimeText {
     font-family: 'Bangers', cursive;
-    font-size: 6rem;
+    font-size: 8vw; /* Responsive font sizing */
     color: white;
     text-align: center;
     text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000, 4px 4px 5px rgba(0,0,0,0.5);
-    display: none; 
+    display: none;
     user-select: none;
     pointer-events: none;
     -webkit-text-stroke: 2px black;
@@ -40,21 +42,52 @@ body {
 .control-button {
     position: absolute;
     pointer-events: auto;
-    width: 56px; height: 56px;
-    font-size: 1.875rem; line-height: 2.25rem;
+    width: 14vw; height: 14vw;
+    max-width: 64px; max-height: 64px;
+    font-size: 5vw;
+    max-font-size: 2rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    color: white;
+    background-color: #dc2626; /* Tailwind red-600 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
     transition: transform 0.2s ease-in-out;
 }
-.control-button:hover { transform: scale(1.1); }
 
-/* Desktop Positions */
-#bangButton { top: 48%; left: 50%; transform: translate(-50%, -50%); }
-#pButton { top: 78%; left: 30%; transform: translate(-50%, -50%); }
-#cButton { top: 78%; left: 70%; transform: translate(-50%, -50%); }
+.control-button:hover {
+    transform: scale(1.1);
+}
 
-/* Mobile Positions */
-@media (max-width: 640px) {
-    #partyTimeText { font-size: 4rem; }
-    .control-button { width: 48px; height: 48px; font-size: 1.5rem; }
-    #pButton { top: 88%; left: 15%; transform: translate(-50%, -50%);}
-    #cButton { top: 88%; left: 85%; transform: translate(-50%, -50%);}
+/* Button positions using vh/vw instead of fixed percentages */
+#bangButton {
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+#pButton {
+    top: 78vh;
+    left: 25vw;
+    transform: translate(-50%, -50%);
+}
+
+#cButton {
+    top: 78vh;
+    left: 75vw;
+    transform: translate(-50%, -50%);
+}
+
+/* Optional mobile fine-tune */
+@media (max-width: 480px) {
+    .control-button {
+        width: 18vw;
+        height: 18vw;
+        font-size: 6vw;
+    }
+    #partyTimeText {
+        font-size: 10vw;
+    }
 }
